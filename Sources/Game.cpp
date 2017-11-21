@@ -22,8 +22,8 @@ int     score;          //!< スコア
 void Start()
 {
     cloudPos = Vector2(-320, 100);
-    cannonPos = Vector2(-80, -150);
-    targetRect = Rect(80, -140, 40, 40);
+    cannonPos = Vector2(-250, -150);      //砲台を左に動かしました(HW16A096 白永 滉)
+    targetRect = Rect(250, -140, 40, 40); //ターゲットを右に動かしました(HW16A096 白永 滉)
     bulletPos.x = -999;
     score = 0;
 }
@@ -61,7 +61,7 @@ void Update()
     }
 
     // 砲台の描画
-    FillRect(Rect(cannonPos.x-10, -140, 20, 100), Color::blue);
+    FillRect(Rect(cannonPos.x -10, -140, 20, 100), Color::blue);
     DrawImage("cannon.png", cannonPos);
 
     // ターゲットの描画

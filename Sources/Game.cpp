@@ -21,7 +21,7 @@ int     score;          //!< スコア
 // ゲーム開始時に呼ばれる関数です。
 void Start()
 {
-    cloudPos = Vector2(-320, 100);
+    cloudPos = Vector2(-380, 100);  //雲の初期位置を少し左にずらしました
     cannonPos = Vector2(-80, -150);
     targetRect = Rect(80, -140, 40, 40);
     bulletPos.x = -999;
@@ -53,7 +53,12 @@ void Update()
     FillRect(Rect(-320, -240, 640, 100), Color::green);
 
     // 雲の描画
+    cloudPos.x += 100.0f*Time::deltaTime;
+    if(cloudPos.x > Screen::size().x / 2){
+        cloudPos.x = -380;      //雲を左から右へ動かして画面外に出ると初期位置に戻るようにしました
+    }
     DrawImage("cloud1.png", cloudPos);
+    
 
     // 弾の描画
     if (bulletPos.x > -999) {

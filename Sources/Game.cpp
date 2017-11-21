@@ -37,6 +37,7 @@ void Update()
     // 弾の発射
     if (bulletPos.x <= -999 && Input::GetKeyDown(KeyMask::Space)) {
         bulletPos = cannonPos + Vector2(50, 10);
+        PlaySound("se_maoudamashii_explosion03.mp3");
     }
 
     // 弾の移動
@@ -52,6 +53,7 @@ void Update()
         // 弾が画面外に出ると再発射できるように(実装：HW15A062　菊地龍大)
         if(bulletPos.x > Screen::size().x / 2.0f){
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
+            PlaySound("se_maoudamashii_system20.mp3");
         }
     }
 

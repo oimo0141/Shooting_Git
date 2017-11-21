@@ -22,7 +22,7 @@ int     score;          //!< スコア
 // ゲーム開始時に呼ばれる関数です。
 void Start()
 {
-    cloudPos = Vector2(-320, 100);
+    cloudPos = Vector2(-380, 100);  //雲の初期位置を少し左にずらしました
     cannonPos = Vector2(-250, -150);//砲台を左に動かしました(HW16A096 白永 滉)
     cannonInitPos = cannonPos;// 砲台の初期位置を取得(実装：HW15A062　菊地龍大)
     targetRect = Rect(250, -140, 40, 40); //ターゲットを右に動かしました(HW16A096 白永 滉)
@@ -49,11 +49,11 @@ void Update()
         if (targetRect.Overlaps(bulletRect)) {
             score += 100;         // スコアの加算 //HW15A213 山本 裕生
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
+            PlaySound("se_maoudamashii_system20.mp3");
         }
         // 弾が画面外に出ると再発射できるように(実装：HW15A062　菊地龍大)
         if(bulletPos.x > Screen::size().x / 2.0f){
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
-            PlaySound("se_maoudamashii_system20.mp3");
         }
     }
 
@@ -62,7 +62,12 @@ void Update()
     FillRect(Rect(-320, -240, 640, 100), Color::green);
 
     // 雲の描画
+    cloudPos.x += 100.0f*Time::deltaTime;
+    if(cloudPos.x > Screen::size().x / 2){
+        cloudPos.x = -380;      //雲を左から右へ動かして画面外に出ると初期位置に戻るようにしました
+    }
     DrawImage("cloud1.png", cloudPos);
+    
 
     // 弾の描画
     if (bulletPos.x > -999) {

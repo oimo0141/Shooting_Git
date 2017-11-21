@@ -38,12 +38,16 @@ void Update()
 
     // 弾の移動
     if (bulletPos.x > -999) {
-        bulletPos.x += 10 * Time::deltaTime;
+        bulletPos.x += 640 * Time::deltaTime;// 弾の速度を変更(実装：HW15A062　菊地龍大)
 
         // ターゲットと弾の当たり判定
         Rect bulletRect(bulletPos, Vector2(32, 20));
         if (targetRect.Overlaps(bulletRect)) {
             score += 1;         // スコアの加算
+            bulletPos.x = -999; // 弾を発射可能な状態に戻す
+        }
+        // 弾が画面外に出ると再発射できるように(実装：HW15A062　菊地龍大)
+        if(bulletPos.x > Screen::size().x / 2.0f){
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
         }
     }

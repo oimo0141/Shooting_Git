@@ -23,9 +23,9 @@ int     score;          //!< スコア
 void Start()
 {
     cloudPos = Vector2(-320, 100);
-    cannonPos = Vector2(-80, -150);
+    cannonPos = Vector2(-250, -150);//砲台を左に動かしました(HW16A096 白永 滉)
     cannonInitPos = cannonPos;// 砲台の初期位置を取得(実装：HW15A062　菊地龍大)
-    targetRect = Rect(80, -140, 40, 40);
+    targetRect = Rect(250, -140, 40, 40); //ターゲットを右に動かしました(HW16A096 白永 滉)
     bulletPos.x = -999;
     score = 0;
 }
